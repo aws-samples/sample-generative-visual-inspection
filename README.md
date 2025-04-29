@@ -1,11 +1,33 @@
-## My Project
+## Zero-Training Visual Defect Detection Using Amazon Nova Pro
 
-TODO: Fill this README out!
+In manufacturing, visual quality inspection is critical for ensuring product reliability<br/>
+and compliance. However, traditional approaches—whether manual review or custom-trained<br/>
+computer vision models—are costly, slow to adapt, and difficult to scale across diverse<br/>
+product lines.
 
-Be sure to:
+This Jypiter notebook introduces a zero-training, no-dataset-required visual inspection<br/>
+system using **Amazon Nova Pro**, a multimodal foundation model accessed via **Amazon Bedrock**.<br/>
+Using only a **Jupyter notebook**, you can detect manufacturing defects in product images with structured<br/>
+natural language prompts—no computer vision expertise or labeled data required.<br/>
+By the end of this notebook, you'll be able to:
 
-* Change the title in this README
-* Edit your repository description on GitHub
+* Upload and analyze product images in a Jupyter notebook
+* Detect visual defects using Amazon Nova Pro
+* Automatically return bounding boxes, failure reasons, and QC status
+* Visualize defect overlays on product images
+
+For more background consult the Readme in the same repository.
+
+## Pipeline Architecture in this Notebook
+
+This inspection pipeline operates entirely within a local Jupyter notebook and AWS serverless infrastructure:
+
+1. Image Capture: Use widgets in the notebook to upload a product image (and optionally a reference image).
+2. Image Preprocessing: Images are resized, converted to Base64, and prepared for inference.
+3. AI Inference: Amazon Bedrock invokes Nova Pro to analyze the image and return structured defect data.
+4. Visualization: Bounding boxes and defect reasons are drawn using matplotlib.
+
+User → Jupyter Notebook → Amazon Bedrock (Nova Pro) → JSON Defect Output → Matplotlib Overlay
 
 ## Security
 
