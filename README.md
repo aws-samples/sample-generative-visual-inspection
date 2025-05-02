@@ -29,6 +29,26 @@ This inspection pipeline operates entirely within a local Jupyter notebook and A
 
 User → Jupyter Notebook → Amazon Bedrock (Nova Pro) → JSON Defect Output → Matplotlib Overlay
 
+### Permissions
+
+Ensure the credentials you have can invoke the Amazon Nova models. 
+
+And also ensure you have granted access through the AWS Console: <br/>
+Bedrock → Model Access → Modify model access
+
+```json
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": "bedrock:InvokeModel",
+			"Resource": "*"
+		}
+	]
+}
+```
+
 ## Security
 
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
