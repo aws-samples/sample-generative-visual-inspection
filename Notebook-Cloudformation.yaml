@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation template to create a Jupyter Notebook in SageMaker with Bedrock invoke permissions
+
+Resources:
+  SageMakerNotebookInstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: sagemaker.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: SageMakerNotebookPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'sagemaker:*'
+                  - 'ecr:GetDownloadUrlForLayer'
+                  - 'ecr:BatchGetImage'
+                  - 'ecr:BatchCheckLayerAvailability'
+                  - 'logs:CreateLogGroup'
+                  - 'logs:CreateLogStream'
+                  - 'logs:PutLogEvents'
+                  - 's3:*'
+                Resource: '*'
+              - Effect: Allow
+                Action:
+                  - 'bedrock:InvokeModel'
+                Resource: '*'
+
+  SageMakerNotebookInstance:
+    Type: AWS::SageMaker::NotebookInstance
+    Properties:
+      InstanceType: ml.t3.medium
+      NotebookInstanceName: !Sub '${AWS::StackName}-Notebook'
+      RoleArn: !GetAtt SageMakerNotebookInstanceRole.Arn
+      DefaultCodeRepository: https://github.com/aws-samples/sample-generative-visual-inspection
+
+Outputs:
+  NotebookURL:
+    Description: Information about the value
+    Value: !Sub 'https://${AWS::StackName}-Notebook.notebook.${AWS::Region}.sagemaker.aws/notebooks/sample-generative-visual-inspection/Nova_Pro_Visual_Inspection.ipynb'

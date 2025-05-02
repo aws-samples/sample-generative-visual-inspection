@@ -29,9 +29,17 @@ This inspection pipeline operates entirely within a local Jupyter notebook and A
 
 User → Jupyter Notebook → Amazon Bedrock (Nova Pro) → JSON Defect Output → Matplotlib Overlay
 
+### Getting Started
+
+There is a Cloudformation template available that will create an Amazon Sagemaker Ai Notebook and clones this repository.
+The output of the Cloudformation is a URl to open the Notebook.
+
+Run [this Cloudformation link](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create/review?templateURL=https://ws-assets-prod-iad-r-iad-ed304a55c2ca1aee.s3.us-east-1.amazonaws.com/02f82da5-d6b0-403b-9619-7bb8e506a21a/Notebook-Cloudformation.yaml&stackName=VisualInspectionwithGenerativeAI) and then open the link in the outputs.
+
 ### Permissions
 
-Ensure the credentials you have can invoke the Amazon Nova models. 
+If you manually run the notebook on an EC2 instance or your own laptop
+ensure the credentials you have can invoke the Amazon Nova models. 
 
 And also ensure you have granted access through the AWS Console: <br/>
 Bedrock → Model Access → Modify model access
