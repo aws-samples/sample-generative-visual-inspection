@@ -5,7 +5,7 @@ and compliance. However, traditional approaches—whether manual review or custo
 computer vision models—are costly, slow to adapt, and difficult to scale across diverse<br/>
 product lines.
 
-This Jypiter notebook introduces a zero-training, no-dataset-required visual inspection<br/>
+This Jupyter notebook introduces a zero-training, no-dataset-required visual inspection<br/>
 system using **Amazon Nova Pro**, a multimodal foundation model accessed via **Amazon Bedrock**.<br/>
 Using only a **Jupyter notebook**, you can detect manufacturing defects in product images with structured<br/>
 natural language prompts—no computer vision expertise or labeled data required.<br/>
@@ -20,11 +20,11 @@ For more background consult the Readme in the same repository.
 
 ## Pipeline Architecture in this Notebook
 
-This inspection pipeline operates entirely within a local Jupyter notebook and AWS serverless infrastructure:
+This inspection pipeline operates entirely within a local Jupyter notebook and AWS Generative AI infrastructure:
 
 1. Image Capture: Use widgets in the notebook to upload a product image (and optionally a reference image).
 2. Image Preprocessing: Images are resized, converted to Base64, and prepared for inference.
-3. AI Inference: Amazon Bedrock invokes Nova Pro to analyze the image and return structured defect data.
+3. Generative AI Inference: Amazon Bedrock invokes Nova Pro to analyze the image and return structured defect data.
 4. Visualization: Bounding boxes and defect reasons are drawn using matplotlib.
 
 User → Jupyter Notebook → Amazon Bedrock (Nova Pro) → JSON Defect Output → Matplotlib Overlay
