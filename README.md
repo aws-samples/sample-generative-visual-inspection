@@ -29,6 +29,26 @@ This inspection pipeline operates entirely within a local Jupyter notebook and A
 
 User → Jupyter Notebook → Amazon Bedrock (Nova Pro) → JSON Defect Output → Matplotlib Overlay
 
+### A Note on Bounding Box Coordinates
+
+Amazon Nova does not return bounding boxes in pixels. It returns coordinates
+normalized to a **`[0, 1000)` scale on both the x and y axes**, relative to the
+image it was given. Because the value is a fraction of each axis (×1000), the
+image's size and aspect ratio do not change this scale.
+
+To draw the boxes, the notebook rescales each axis **independently** back to the
+actual image dimensions:
+
+```python
+x_pixel = x / 1000 * image_width
+y_pixel = y / 1000 * image_height
+```
+
+This is why both `model_width` and `model_height` must be `1000`. Using a
+different divisor for the height (e.g. `800`) stretches every box vertically by
+`1000 / 800 = 1.25×`, so defects are drawn in the wrong place — even though the
+coordinates from Nova are correct.
+
 ### Getting Started
 
 There is a Cloudformation template available that will create an Amazon Sagemaker Ai Notebook and clones this repository.
